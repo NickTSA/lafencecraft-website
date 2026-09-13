@@ -1,0 +1,106 @@
+# --- live WordPress content pages ---
+/portfolio/  /projects/  301
+/about/  /about-us/  301
+/contact/  /contact-us/  301
+/aluminum-fence/  /fences/aluminum/  301
+/vinyl-fence/  /fences/vinyl/  301
+/composite-fence/  /fences/composite/  301
+/wood-fence/  /fences/wood/  301
+/aluminum-gates/  /gates/aluminum/  301
+/vinyl-gates/  /gates/vinyl/  301
+/composite-gates/  /gates/composite/  301
+/wood-gates/  /gates/wood/  301
+/composite-decks/  /decks/composite/  301
+/aluminum-patio-covers/  /patio-covers/aluminum/  301
+/vinyl-patio-covers/  /patio-covers/vinyl/  301
+/aluminum-railings/  /railings/aluminum/  301
+/vinyl-railings/  /railings/vinyl/  301
+/composite-railings/  /railings/composite/  301
+/cable-railings/  /railings/cable/  301
+/glass-railings/  /railings/glass/  301
+/wall-cladding/  /fences/  301
+/hello-world/  /  301
+# --- homepage slider CPT ---
+/slider_services/fence/  /fences/  301
+/slider_services/gate/  /gates/  301
+/slider_services/deck/  /decks/  301
+/slider_services/patio-cover/  /patio-covers/  301
+/slider_services/railing/  /railings/  301
+# --- individual FAQ, review, partner and banner CPT entries: no ---
+# --- 1:1 target exists on the new site, so these collapse to one ---
+# --- destination each rather than 26+7+4 near-duplicate rules ---
+/faq/*  /faq/  301
+/review/*  /  301
+/partner/*  /  301
+/fence_banners/*  /  301
+# --- product + best_seller catalog CPTs: 657 individual SKU pages ---
+# --- collapsed to 17 real material+product destinations. Two ---
+# --- entries below preserve typos that existed in the live URLs ---
+# --- (composite-femce, compsite-railing) rather than silently ---
+# --- 'fixing' a URL that real inbound links may still be using. ---
+/product/aluminum-fence*  /fences/aluminum/  301
+/product/composite-fence*  /fences/composite/  301
+/product/composite-femce*  /fences/composite/  301
+/product/vinyl-fence*  /fences/vinyl/  301
+/product/wood-fence*  /fences/wood/  301
+/product/aluminum-gate*  /gates/aluminum/  301
+/product/composite-gate*  /gates/composite/  301
+/product/vinyl-gate*  /gates/vinyl/  301
+/product/wood-gate*  /gates/wood/  301
+/product/composite-deck*  /decks/composite/  301
+/product/aluminum-patio-cover*  /patio-covers/aluminum/  301
+/product/vinyl-patio-cover*  /patio-covers/vinyl/  301
+/product/aluminum-railing*  /railings/aluminum/  301
+/product/cable-railing*  /railings/cable/  301
+/product/composite-railing*  /railings/composite/  301
+/product/compsite-railing*  /railings/composite/  301
+/product/glass-railing*  /railings/glass/  301
+/product/vinyl-railing*  /railings/vinyl/  301
+/best_seller/aluminum-fence*  /fences/aluminum/  301
+/best_seller/composite-fence*  /fences/composite/  301
+/best_seller/composite-femce*  /fences/composite/  301
+/best_seller/vinyl-fence*  /fences/vinyl/  301
+/best_seller/wood-fence*  /fences/wood/  301
+/best_seller/aluminum-gate*  /gates/aluminum/  301
+/best_seller/composite-gate*  /gates/composite/  301
+/best_seller/vinyl-gate*  /gates/vinyl/  301
+/best_seller/wood-gate*  /gates/wood/  301
+/best_seller/composite-deck*  /decks/composite/  301
+/best_seller/aluminum-patio-cover*  /patio-covers/aluminum/  301
+/best_seller/vinyl-patio-cover*  /patio-covers/vinyl/  301
+/best_seller/aluminum-railing*  /railings/aluminum/  301
+/best_seller/cable-railing*  /railings/cable/  301
+/best_seller/composite-railing*  /railings/composite/  301
+/best_seller/compsite-railing*  /railings/composite/  301
+/best_seller/glass-railing*  /railings/glass/  301
+/best_seller/vinyl-railing*  /railings/vinyl/  301
+# --- anything else under these two CPTs: numeric or ---
+# --- coded SKU paths with no material in the URL ---
+/product/*  /projects/  301
+/best_seller/*  /projects/  301
+# --- interim URLs from earlier drafts of this build ---
+/materials/  /services/  301
+/vinyl/  /fences/vinyl/  301
+/aluminum/  /fences/aluminum/  301
+/composite/  /fences/composite/  301
+/wood/  /fences/wood/  301
+/fence-installation-pasadena/  /service-areas/pasadena/  301
+/fence-installation-glendale/  /service-areas/glendale/  301
+/fence-installation-burbank/  /service-areas/burbank/  301
+/fence-installation-arcadia/  /service-areas/arcadia/  301
+/fence-installation-monrovia/  /service-areas/monrovia/  301
+/fence-installation-san-gabriel/  /service-areas/san-gabriel/  301
+/fence-installation-temple-city/  /service-areas/temple-city/  301
+/fence-installation-alhambra/  /service-areas/alhambra/  301
+/fence-installation-altadena/  /service-areas/altadena/  301
+/fence-installation-sierra-madre/  /service-areas/sierra-madre/  301
+/fence-installation-south-pasadena/  /service-areas/south-pasadena/  301
+/fence-installation-la-canada-flintridge/  /service-areas/la-canada-flintridge/  301
+/fence-installation-long-beach/  /service-areas/long-beach/  301
+/fence-installation-anaheim/  /service-areas/anaheim/  301
+/fence-installation-santa-ana/  /service-areas/santa-ana/  301
+/fence-installation-irvine/  /service-areas/irvine/  301
+/fence-installation-downtown-la/  /service-areas/downtown-la/  301
+/fence-installation-duarte/  /service-areas/duarte/  301
+
+# TODO: crawl the live site and add any remaining URL before cutover.

@@ -1,0 +1,796 @@
+/* ==========================================================================
+   LA Fence Craft — core stylesheet
+   Palette : sampled from the logo — steel blue #156486, picket orange #C2572B,
+             and the navy #0C182B used across their Instagram cards
+   Type    : Archivo, one family — weight 800 narrowed for display (matching the
+             heavy condensed wordmark), normal width for body
+   Motif   : the logo's own skyline-palms-pickets band, used as structure
+   ========================================================================== */
+
+:root{
+  /* Sampled directly from the logo file and the Instagram grid.
+     #156486 = the wordmark / skyline blue. #C2572B = the picket orange.
+     #0C182B / #12324A = the navy used across their IG marketing cards. */
+  --ink:#0C182B;
+  --navy:#12324A;
+  --navy-2:#1B4460;
+  --steel:#156486;
+  --steel-lt:#2A7FA4;
+  --rust:#C2572B;
+  --rust-lt:#DD6E3C;
+  --rust-dk:#994A24;
+  /* Filled buttons use a slightly deeper rust so white text clears WCAG AA
+     (4.98:1 vs 4.48:1 on the raw brand orange). The brand orange stays the
+     accent colour everywhere it sits on light ground. */
+  --rust-btn:#B85026;
+  --stone:#F2EFE9;
+  --stone-2:#E6E2D9;
+  --paper:#FFFFFF;
+  --line:rgba(12,24,43,.14);
+  --line-lt:rgba(255,255,255,.18);
+
+  /* One family, two roles — the logo wordmark is a heavy condensed grotesque,
+     so display is Archivo at weight 800 narrowed on the width axis, and body is
+     the same face at normal width. A serif display would fight the mark. */
+  --f-display:"Archivo",system-ui,sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  --wrap:1180px;
+  --gut:clamp(20px,5vw,48px);
+  --r:3px;
+  --shadow:0 1px 2px rgba(12,24,43,.06),0 8px 28px rgba(12,24,43,.09);
+  --shadow-lg:0 2px 6px rgba(12,24,43,.08),0 24px 60px rgba(12,24,43,.16);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+body{
+  margin:0;background:var(--stone);color:var(--ink);
+  font-family:var(--f-body);font-size:17px;line-height:1.65;
+  font-weight:400;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}
+button{font:inherit}
+
+/* ---------- type ---------- */
+h1,h2,h3,h4{
+  font-family:var(--f-display);
+  font-weight:800;font-variation-settings:"wdth" 88;
+  line-height:1.02;letter-spacing:-.022em;margin:0 0 .5em;
+  text-wrap:balance;color:var(--ink);
+}
+h1{font-size:clamp(2.5rem,6.6vw,4.5rem)}
+h2{font-size:clamp(1.85rem,4.2vw,3rem)}
+h3{font-size:clamp(1.2rem,2.1vw,1.5rem);font-variation-settings:"wdth" 92;letter-spacing:-.015em}
+h4{font-size:1rem;font-weight:700;font-variation-settings:"wdth" 100;letter-spacing:-.005em}
+p{margin:0 0 1.1em;text-wrap:pretty}
+.lede{font-size:clamp(1.05rem,1.8vw,1.24rem);line-height:1.58;color:rgba(12,24,43,.76);max-width:62ch}
+
+/* Eyebrows echo the all-caps condensed treatment on their Instagram cards. */
+.eyebrow{
+  font-family:var(--f-display);font-size:.74rem;font-weight:800;
+  font-variation-settings:"wdth" 92;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--rust);
+  display:flex;align-items:center;gap:.7rem;margin:0 0 1rem;
+}
+.eyebrow::after{content:"";flex:1;height:2px;background:var(--rust);opacity:.3;max-width:90px}
+
+/* ---------- layout ---------- */
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+.section{padding-block:clamp(56px,8vw,104px)}
+.section--tight{padding-block:clamp(40px,5vw,64px)}
+.section--dark{background:var(--navy);color:var(--stone)}
+.section--dark .lede{color:rgba(242,239,233,.76)}
+.section--dark h2,.section--dark h3{color:var(--stone)}
+.section--paper{background:var(--paper)}
+.grid{display:grid;gap:clamp(16px,2.4vw,28px)}
+.g-2{grid-template-columns:repeat(2,1fr)}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g-3,.g-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g-2,.g-3,.g-4{grid-template-columns:1fr}}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+
+.picket{
+  height:14px;
+  background:repeating-linear-gradient(90deg,var(--rust) 0 4px,transparent 4px 13px);
+  opacity:.5;
+}
+.picket--dark{background:repeating-linear-gradient(90deg,var(--navy) 0 4px,transparent 4px 13px);opacity:.22}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  padding:.95rem 1.6rem;border-radius:var(--r);border:1.5px solid transparent;
+  font-weight:700;font-size:.98rem;letter-spacing:.01em;text-decoration:none;
+  cursor:pointer;transition:transform .16s ease,background .16s ease,color .16s ease,border-color .16s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.btn--primary{background:var(--rust-btn);color:#FFFFFF;border-color:var(--rust-btn)}
+.btn--primary:hover{background:var(--rust-lt);border-color:var(--rust-lt)}
+.btn--dark{background:var(--navy);color:var(--stone);border-color:var(--navy)}
+.btn--dark:hover{background:var(--ink);border-color:var(--ink)}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn--ghost:hover{border-color:var(--ink)}
+.section--dark .btn--ghost{color:var(--stone);border-color:var(--line-lt)}
+.section--dark .btn--ghost:hover{border-color:var(--stone)}
+.btn--lg{padding:1.15rem 2rem;font-size:1.05rem}
+.btn-row{display:flex;flex-wrap:wrap;gap:.75rem}
+
+/* ---------- header ---------- */
+.topbar{background:var(--ink);color:rgba(242,239,233,.82);font-size:.8rem}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  min-height:38px;flex-wrap:wrap}
+.topbar a{color:inherit;text-decoration:none}
+.topbar a:hover{color:var(--rust-lt)}
+.topbar strong{color:var(--stone)}
+
+.site-head{position:sticky;top:0;z-index:60;background:rgba(242,239,233,.94);
+  backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.site-head .wrap{display:flex;align-items:center;gap:1.5rem;min-height:74px}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;flex:0 0 auto}
+.brand img{height:40px;width:auto}
+.brand-txt{font-family:var(--f-display);font-weight:600;font-size:1.18rem;letter-spacing:-.02em;line-height:1}
+.brand-txt small{display:block;font-family:var(--f-body);font-size:.6rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--rust);margin-top:3px}
+
+.nav{margin-left:auto;display:flex;align-items:center;gap:1.6rem}
+.nav a{text-decoration:none;font-size:.95rem;font-weight:600;padding:.4rem 0;
+  border-bottom:2px solid transparent;transition:border-color .16s,color .16s}
+.nav a:hover,.nav a[aria-current=page]{border-color:var(--rust)}
+.nav-cta{display:flex;align-items:center;gap:.8rem}
+.nav-tel{font-family:var(--f-display);font-weight:600;font-size:1.05rem;text-decoration:none;white-space:nowrap}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:var(--r);
+  padding:.6rem .7rem;cursor:pointer;line-height:0}
+.burger span{display:block;width:20px;height:2px;background:var(--ink);margin:4px 0}
+@media(max-width:1000px){
+  .nav{position:fixed;inset:112px 0 auto 0;background:var(--stone);flex-direction:column;
+    align-items:stretch;gap:0;padding:0 var(--gut) 1.5rem;border-bottom:1px solid var(--line);
+    max-height:calc(100dvh - 112px);overflow:auto;display:none}
+  .nav[data-open=true]{display:flex}
+  .nav a{padding:.9rem 0;border-bottom:1px solid var(--line)}
+  .nav-cta{padding-top:1rem;flex-direction:column;align-items:stretch}
+  .nav-cta .btn{width:100%}
+  .burger{display:block;margin-left:auto}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:var(--navy);color:var(--stone);overflow:hidden}
+.hero-media{position:absolute;inset:0}
+.hero-media img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.hero-media::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(12,24,43,.93) 0%,rgba(12,24,43,.84) 34%,rgba(12,24,43,.62) 54%,rgba(12,24,43,.24) 74%,rgba(12,24,43,.05) 100%)}
+.hero-pickets{position:absolute;inset:auto 0 0 0;height:44%;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(12,24,43,.42) 0 7px,transparent 7px 22px);
+  mask-image:linear-gradient(to top,#000 0%,transparent 100%),linear-gradient(to right,#000 40%,transparent 90%);
+  -webkit-mask-image:linear-gradient(to top,#000 0%,transparent 100%),linear-gradient(to right,#000 40%,transparent 90%);
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+.hero .wrap{position:relative;z-index:2;padding-block:clamp(64px,10vw,124px)}
+.hero h1{color:var(--stone);max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--rust-lt)}
+.hero .lede{color:rgba(242,239,233,.82);margin-bottom:1.8rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:2.2rem}
+.hero-proof{display:flex;flex-wrap:wrap;gap:1.4rem 2.4rem;padding-top:1.6rem;
+  border-top:1px solid var(--line-lt)}
+.hero-proof div{min-width:104px}
+.hero-proof b{display:block;font-family:var(--f-display);font-size:1.7rem;line-height:1;color:var(--rust-lt)}
+.hero-proof span{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(242,239,233,.68);font-weight:600}
+
+/* ---------- trust bar ---------- */
+.trustbar{background:var(--ink);color:rgba(242,239,233,.8);font-size:.86rem}
+.trustbar .wrap{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:space-between;
+  padding-block:.95rem;align-items:center}
+.trustbar b{color:var(--stone)}
+
+/* ---------- cards ---------- */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+a.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:transparent}
+.card-body{padding:1.4rem 1.4rem 1.6rem;flex:1;display:flex;flex-direction:column}
+.card h3{margin-bottom:.4rem}
+.card p{font-size:.94rem;color:rgba(12,24,43,.72);margin-bottom:1rem}
+.card .more{margin-top:auto;font-weight:700;font-size:.88rem;color:var(--rust);
+  letter-spacing:.02em;display:inline-flex;align-items:center;gap:.4rem}
+a.card:hover .more{gap:.7rem}
+.card-figure{position:relative;aspect-ratio:4/3;background:var(--navy-2);overflow:hidden}
+.card-figure img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+a.card:hover .card-figure img{transform:scale(1.04)}
+
+/* photo placeholder — shows exactly which asset belongs here */
+.ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  gap:.35rem;padding:1rem;color:rgba(242,239,233,.9);
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 6px,transparent 6px 20px),
+    linear-gradient(155deg,var(--navy-2),var(--ink));}
+.ph b{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust-lt);font-weight:700}
+.ph span{font-size:.82rem;line-height:1.35;color:rgba(242,239,233,.72)}
+
+/* ---------- materials table ---------- */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:660px;font-size:.93rem}
+th,td{padding:.95rem 1.1rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--navy);color:var(--stone);font-family:var(--f-body);font-weight:700;
+  font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:none}
+tbody th{font-family:var(--f-display);font-size:1.02rem;font-weight:600;white-space:nowrap}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:rgba(12,24,43,.025)}
+
+/* ---------- process (real ordered sequence — numbering earns its place) ---------- */
+.steps{counter-reset:s;display:grid;gap:0}
+.step{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:1.4rem;
+  padding:1.6rem 0;border-top:1px solid var(--line-lt)}
+.step:first-child{border-top:none}
+.step::before{content:counter(s,decimal-leading-zero);font-family:var(--f-display);
+  font-size:1.5rem;color:var(--rust);line-height:1.1;font-weight:600}
+.step h3{margin-bottom:.3rem}
+.step p{margin:0;color:rgba(242,239,233,.74);font-size:.96rem;max-width:60ch}
+
+/* ---------- reviews ---------- */
+.reviews{display:grid;gap:clamp(16px,2vw,24px);grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.reviews{grid-template-columns:1fr}}
+.review{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:1.5rem}
+.stars{color:var(--rust);letter-spacing:.14em;font-size:.9rem;margin-bottom:.7rem}
+.review p{font-size:.96rem;margin-bottom:1rem}
+.review cite{font-style:normal;font-weight:700;font-size:.9rem;display:block}
+.review small{color:rgba(12,24,43,.6);font-size:.8rem}
+
+/* ---------- areas ---------- */
+.arealist{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem 1.4rem;
+  list-style:none;padding:0;margin:0}
+@media(max-width:820px){.arealist{grid-template-columns:repeat(2,1fr)}}
+.arealist a{display:block;padding:.55rem 0;text-decoration:none;font-weight:600;font-size:.95rem;
+  border-bottom:1px solid var(--line-lt)}
+.arealist a:hover{color:var(--rust-lt)}
+/* Counties lead the same list as the cities below them — no separate
+   section, just a visual weight difference so they still read as the
+   top of the order. Deliberately NOT a 4-column grid like .arealist:
+   sharing that column count made "Temple City" (LA County) look like
+   it was filed under the "Orange County" header directly above it. */
+.arealist--counties{display:flex;flex-wrap:wrap;gap:.6rem 1.1rem;list-style:none;padding:0;
+  margin:0 0 1.3rem;padding-bottom:1.1rem;border-bottom:1px solid var(--line)}
+.arealist--counties li{display:inline-flex}
+.arealist--counties a{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--f-display);
+  font-size:1rem;font-weight:800;color:var(--ink);background:var(--stone);
+  border:1px solid var(--line);border-radius:var(--r);padding:.6rem 1.1rem}
+.arealist--counties a::after{content:"→";font-weight:700;color:var(--rust);font-size:.85rem}
+.arealist--counties a:hover{color:var(--rust);border-color:var(--rust)}
+
+/* ---------- FAQ ---------- */
+.faq details{border-bottom:1px solid var(--line);padding:.35rem 0}
+.faq summary{cursor:pointer;padding:1.05rem 2rem 1.05rem 0;font-weight:700;font-size:1.03rem;
+  list-style:none;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.2rem;top:.85rem;font-size:1.5rem;
+  color:var(--rust);font-family:var(--f-display);line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 1.1rem;color:rgba(12,24,43,.76);font-size:.97rem;max-width:74ch}
+.faq summary:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
+
+/* ---------- estimate form ---------- */
+.form-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:clamp(22px,3.4vw,38px);box-shadow:var(--shadow)}
+.field{margin-bottom:1.05rem}
+.field label{display:block;font-size:.82rem;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:.4rem;color:rgba(12,24,43,.72)}
+.field input,.field select,.field textarea{
+  width:100%;padding:.85rem .9rem;border:1.5px solid var(--line);border-radius:var(--r);
+  background:var(--stone);font:inherit;font-size:1rem;color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--rust);background:var(--paper)}
+.field textarea{min-height:104px;resize:vertical}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:560px){.field-row{grid-template-columns:1fr}}
+.choice{display:flex;flex-wrap:wrap;gap:.5rem}
+.choice input{position:absolute;opacity:0;pointer-events:none}
+.choice label{display:inline-block;padding:.6rem 1rem;border:1.5px solid var(--line);
+  border-radius:var(--r);cursor:pointer;font-size:.92rem;font-weight:600;text-transform:none;
+  letter-spacing:0;margin:0;color:var(--ink);transition:.15s}
+.choice input:checked+label{background:var(--navy);color:var(--stone);border-color:var(--navy)}
+.choice input:focus-visible+label{outline:3px solid var(--rust);outline-offset:2px}
+.formnote{font-size:.82rem;color:rgba(12,24,43,.6);margin:.9rem 0 0}
+.steps-dots{display:flex;gap:.4rem;margin-bottom:1.4rem}
+.steps-dots i{height:3px;flex:1;background:var(--line);border-radius:2px}
+.steps-dots i.on{background:var(--rust)}
+.fstep[hidden]{display:none}
+
+/* ---------- footer ---------- */
+.site-foot{background:var(--ink);color:rgba(242,239,233,.72);font-size:.92rem}
+.site-foot .wrap{padding-block:clamp(44px,6vw,72px)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:clamp(24px,4vw,48px)}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
+.site-foot h4{color:var(--stone);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:1rem;color:var(--rust-lt)}
+.site-foot ul{list-style:none;padding:0;margin:0}
+.site-foot li{margin-bottom:.55rem}
+.site-foot a{text-decoration:none}
+.site-foot a:hover{color:var(--rust-lt)}
+.foot-brand img{height:44px;margin-bottom:1rem}
+.foot-bottom{border-top:1px solid var(--line-lt);padding-block:1.2rem;font-size:.82rem;
+  display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;justify-content:space-between}
+.socials{display:flex;gap:.7rem;margin-top:1rem}
+.socials a{width:36px;height:36px;border:1px solid var(--line-lt);border-radius:var(--r);
+  display:grid;place-items:center;font-size:.78rem;font-weight:700;text-decoration:none}
+.socials a:hover{border-color:var(--rust);color:var(--rust-lt)}
+
+/* ---------- sticky mobile call bar ---------- */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;
+  grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+  box-shadow:0 -6px 24px rgba(12,24,43,.18)}
+.callbar a{padding:1rem .6rem;text-align:center;text-decoration:none;font-weight:700;font-size:.95rem}
+.callbar .c1{background:var(--navy);color:var(--stone)}
+.callbar .c2{background:var(--rust);color:#FFFFFF}
+@media(max-width:760px){.callbar{display:grid}body{padding-bottom:58px}}
+
+/* ---------- breadcrumbs & misc ---------- */
+.crumbs{font-size:.83rem;color:rgba(12,24,43,.6);padding-block:1rem}
+.crumbs a{text-decoration:none;font-weight:600}
+.crumbs a:hover{color:var(--rust)}
+.hero .crumbs{color:rgba(242,239,233,.6)}
+.pagehead{background:var(--navy);color:var(--stone);position:relative;overflow:hidden}
+.pagehead .wrap{position:relative;z-index:2;padding-block:clamp(44px,6vw,80px)}
+.pagehead h1{color:var(--stone);max-width:20ch}
+.pagehead .lede{color:rgba(242,239,233,.8)}
+.pagehead::after{content:"";position:absolute;inset:auto 0 0 0;height:60%;
+  background:repeating-linear-gradient(90deg,rgba(12,24,43,.4) 0 7px,transparent 7px 22px);
+  mask-image:linear-gradient(to top,#000,transparent);
+  -webkit-mask-image:linear-gradient(to top,#000,transparent)}
+/* A plain, short title strip for pages where the content itself should be
+   the first thing in view — no photo, no dark overlay, minimal padding. */
+.pagehead--slim{background:var(--stone);color:var(--ink);border-bottom:1px solid var(--line)}
+.pagehead--slim .wrap{padding:clamp(16px,2.6vw,26px) var(--gut) clamp(14px,2.2vw,20px)}
+.pagehead--slim .eyebrow{color:var(--rust)}
+.pagehead--slim h1{color:var(--ink);max-width:none;font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:.35rem}
+.pagehead--slim .lede{color:rgba(12,24,43,.62);max-width:70ch;font-size:clamp(.92rem,1.4vw,1.02rem)}
+.pagehead--slim::after{display:none}
+
+.callout{border-left:3px solid var(--rust);padding:.4rem 0 .4rem 1.3rem;margin:1.6rem 0;
+  font-size:.98rem;color:rgba(12,24,43,.8)}
+.section--dark .callout{color:rgba(242,239,233,.8)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:.5rem;top:.5rem;z-index:200;background:var(--rust);color:#FFFFFF;
+  padding:.7rem 1rem;border-radius:var(--r);font-weight:700}
+.tel-lg{font-family:var(--f-display);font-size:clamp(1.5rem,3vw,2.1rem);text-decoration:none;
+  font-weight:600;display:inline-block}
+.tel-lg:hover{color:var(--rust)}
+
+/* ---------- fixes from mobile/contrast review ---------- */
+
+/* Ghost buttons sit on dark backgrounds in the hero and page headers too,
+   not just inside .section--dark. Without this they render near-invisible. */
+.hero .btn--ghost,.pagehead .btn--ghost{color:var(--stone);border-color:rgba(242,239,233,.4)}
+.hero .btn--ghost:hover,.pagehead .btn--ghost:hover{border-color:var(--stone);background:rgba(242,239,233,.08)}
+
+/* The topbar is useful context on desktop and three wasted lines on a phone.
+   Hours and license live in the footer and on /contact/ anyway. */
+@media(max-width:760px){
+  .topbar{display:none}
+  .site-head .wrap{min-height:64px}
+  .brand img{height:34px}
+  .brand-txt{font-size:1.02rem}
+  .nav{inset-block-start:64px;max-height:calc(100dvh - 64px)}
+}
+
+/* Small phones (360px and under): the brand block couldn't shrink, so the
+   burger was pushed past the right edge and the whole page scrolled
+   sideways. Let the brand give way instead. */
+@media(max-width:420px){
+  .site-head .wrap{gap:.6rem}
+  .brand{flex:0 1 auto;min-width:0}
+  .brand img{height:30px}
+  .brand-txt{font-size:.94rem;min-width:0;overflow:hidden}
+  .brand-txt small{letter-spacing:.1em}
+}
+
+/* Give the material table's first two columns room so they stop wrapping badly */
+@media(min-width:661px){
+  tbody th{min-width:120px}
+  table td:first-of-type{min-width:130px}
+}
+@media(min-width:1001px){.nav>a{white-space:nowrap}.nav{gap:1.25rem}}
+
+/* ---------- hero video ----------
+   The video sits under the dimming gradient, never above it. Order matters:
+   poster image (z0) → video (z1) → gradient scrim (z2) → picket scrim (z3). */
+.hero-media img{z-index:0}
+.hero-video{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;
+  border:0;z-index:1;pointer-events:none;opacity:1;
+}
+.hero-media::after{z-index:2}
+.hero-pickets{z-index:3}
+/* The video plays on every screen size. Whether it loads at all is decided in
+   JS by connection quality, not by breakpoint — an iPhone Pro Max reports a
+   430px viewport, so a width query would have excluded exactly the phones we
+   most want it on. Reduced-motion is still an absolute exclusion: that's a
+   deliberate accessibility setting, often vestibular, and it overrides everything. */
+@media(prefers-reduced-motion:reduce){.hero-video{display:none}}
+.hero-video[hidden]{display:none}
+
+/* On narrow screens the 16:9 video has to overscan hard to cover a tall hero.
+   Anchor it slightly high so the horizon doesn't sit under the CTA buttons. */
+@media(max-width:760px){
+  .hero-video{top:42%;width:max(100%,177.78vh);height:max(100%,56.25vw)}
+}
+
+/* ---------- portfolio filter ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.filters button{
+  padding:.55rem 1.1rem;border:1.5px solid var(--line);border-radius:var(--r);
+  background:transparent;cursor:pointer;font-weight:600;font-size:.92rem;
+  color:var(--ink);transition:.15s}
+.filters button:hover{border-color:var(--ink)}
+.filters button[aria-pressed=true]{background:var(--navy);color:var(--stone);border-color:var(--navy)}
+.filters button:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
+.tile[hidden]{display:none}
+.gal-count{font-size:.88rem;color:rgba(12,24,43,.6);margin:0 0 1.2rem}
+/* /projects/ specifically: the filter bar and the photos are the page — cut
+   the usual big top breathing room from .section so the grid starts right
+   under the breadcrumb instead of a full section's worth of empty space down. */
+.section--gallery-lead{padding-top:clamp(18px,2.2vw,28px)}
+
+/* ---------- material swatches ---------- */
+.swatches{display:flex;flex-wrap:wrap;gap:.9rem;margin:1.4rem 0}
+.swatch{text-align:center;font-size:.76rem;font-weight:600;letter-spacing:.04em}
+.swatch i{display:block;width:66px;height:66px;border-radius:var(--r);
+  border:1px solid var(--line);margin-bottom:.45rem}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.2rem;font-size:.95rem;
+  border-top:1px solid var(--line);padding-top:1.2rem;margin-top:1.4rem}
+.spec dt{font-weight:700;color:rgba(12,24,43,.62);font-size:.78rem;letter-spacing:.08em;
+  text-transform:uppercase;padding-top:.15rem}
+.spec dd{margin:0}
+.section--dark .spec{border-color:var(--line-lt)}
+.section--dark .spec dt{color:rgba(242,239,233,.6)}
+
+/* Ghost button now sits over brighter footage on the right — give it its own
+   backdrop so the outline never disappears into a light frame of video. */
+.hero .btn--ghost{background:rgba(12,24,43,.42);backdrop-filter:blur(3px);border-color:rgba(242,239,233,.55)}
+.hero .btn--ghost:hover{background:rgba(12,24,43,.62);border-color:var(--stone)}
+
+/* Mobile: a much lighter dim so the footage actually reads. Legibility is
+   handled on the type itself with a shadow rather than by blanketing the whole
+   frame — a heavy scrim makes the video pointless, which defeats having one. */
+@media(max-width:760px){
+  .hero-media::after{
+    background:linear-gradient(180deg,
+      rgba(12,24,43,.24) 0%,
+      rgba(12,24,43,.38) 30%,
+      rgba(12,24,43,.52) 68%,
+      rgba(12,24,43,.66) 100%);
+  }
+  .hero-pickets{opacity:.5}
+  /* Two shadows: a tight one for edge definition, a wide soft one that acts as
+     a local scrim so light footage behind a letter can't wash it out. */
+  .hero h1,.hero .lede,.hero .eyebrow,.hero-proof b,.hero-proof span{
+    text-shadow:0 1px 2px rgba(6,14,26,.7),0 2px 22px rgba(6,14,26,.85);
+  }
+  .hero-proof{border-top-color:rgba(242,239,233,.35)}
+  .hero .btn--ghost{background:rgba(12,24,43,.55)}
+}
+
+
+/* ---------- social icons ---------- */
+.socials a{width:38px;height:38px;color:rgba(242,239,233,.78)}
+.socials a:hover{border-color:var(--rust);color:var(--rust-lt);background:rgba(184,134,59,.1)}
+.socials svg{display:block}
+
+/* ---------- header CTA ----------
+   The nav button was wrapping to two lines at some widths, which threw the
+   header's vertical rhythm off. Lock it to one line and tighten the padding
+   so it reads as a control, not a paragraph. */
+.site-head .btn{white-space:nowrap;padding:.7rem 1.15rem;font-size:.92rem;line-height:1.15}
+.nav-cta{gap:1rem}
+@media(min-width:1001px){.nav{gap:1.15rem}.nav a{font-size:.92rem}}
+@media(max-width:1000px){.site-head .btn{padding:.9rem 1.2rem;font-size:1rem}}
+
+/* ---------- form ---------- */
+.field-legend{display:block;font-size:.82rem;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:.55rem;color:rgba(12,24,43,.72);padding:0}
+.field-legend span,.field label span{font-weight:400;text-transform:none;letter-spacing:0;
+  color:rgba(12,24,43,.45);font-size:.86em}
+.form-card fieldset{min-width:0}
+/* Labels in a two-up row can differ in height; bottom-align so the inputs
+   themselves line up rather than the label tops. */
+.field-row{align-items:end}
+.field-row .field{margin-bottom:1.05rem}
+/* The header is sticky, so anchor targets and focus scrolls need to clear it. */
+:target,.field,.fstep,section[id],h2,h3{scroll-margin-top:96px}
+/* Team cards: keep the name on one line where it fits, and pin contact details
+   to the bottom so the four cards align regardless of bio length. */
+.team-card h3{font-size:1.12rem;font-variation-settings:"wdth" 84}
+.team-card .card-body{display:flex;flex-direction:column}
+
+/* ---------- slideshow ---------- */
+.slides{position:relative;background:var(--ink);border-radius:var(--r);overflow:hidden}
+.slides-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+@media(prefers-reduced-motion:reduce){.slides-track{transition:none}}
+/* Source photos are 3:4 portrait. A wide 16:10 slide discarded over half of
+   every frame, and capping height just reintroduced the crop, so on desktop the
+   slide becomes a two-column layout: the photo keeps its own 3:4 shape at a
+   sensible width, and the caption takes the space beside it. Stacks on mobile. */
+.slide{flex:0 0 100%;position:relative;background:var(--navy-2)}
+.slide img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/4}
+
+@media(min-width:820px){
+  .slides{background:transparent}
+  .slide{display:grid;grid-template-columns:minmax(0,400px) 1fr;
+    gap:clamp(24px,4vw,52px);align-items:center;background:var(--ink);
+    padding:clamp(20px,3vw,40px)}
+  .slide img{border-radius:var(--r);height:auto}
+  .slide figcaption{position:static;background:none;padding:0;
+    color:var(--stone);font-size:1.02rem;line-height:1.55;max-width:46ch}
+  .slide figcaption b{font-size:clamp(1.4rem,2.4vw,2rem);margin-bottom:.6rem;
+    line-height:1.1;letter-spacing:-.02em}
+  .slides-nav[data-prev]{left:auto;right:70px;top:auto;bottom:24px;transform:none}
+  .slides-nav[data-next]{right:20px;top:auto;bottom:24px;transform:none}
+  .slides-nav:hover{transform:scale(1.06)}
+}
+@media(max-width:819px){
+  .slide{aspect-ratio:3/4;max-height:78vh}
+}
+.slide figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:2.6rem 1.4rem 1.2rem;color:var(--stone);
+  font-size:.94rem;line-height:1.4;
+  background:linear-gradient(to top,rgba(12,24,43,.92),rgba(12,24,43,.55) 55%,transparent);
+}
+.slide figcaption b{display:block;font-family:var(--f-display);font-weight:800;
+  font-variation-settings:"wdth" 90;font-size:1.05rem;margin-bottom:.15rem}
+.slides-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(242,239,233,.9);color:var(--ink);display:grid;place-items:center;
+  font-size:1.3rem;line-height:1;transition:background .15s,transform .15s}
+.slides-nav:hover{background:var(--stone);transform:translateY(-50%) scale(1.06)}
+.slides-nav:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
+.slides-nav[data-prev]{left:12px}
+.slides-nav[data-next]{right:12px}
+.slides-dots{display:flex;gap:.45rem;justify-content:center;padding:1rem 0 0}
+.slides-dots button{width:9px;height:9px;padding:0;border-radius:50%;border:0;cursor:pointer;
+  background:var(--line);transition:.15s}
+.slides-dots button[aria-current=true]{background:var(--rust);width:26px;border-radius:5px}
+.slides-dots button:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.slides-count{position:absolute;top:12px;right:14px;z-index:3;font-size:.76rem;font-weight:700;
+  letter-spacing:.1em;color:var(--stone);background:rgba(12,24,43,.6);
+  padding:.35rem .6rem;border-radius:var(--r)}
+@media(max-width:620px){.slides-nav{width:38px;height:38px}.slide figcaption{font-size:.86rem}}
+
+/* ---------- social strip ---------- */
+.social-band{background:var(--ink);color:var(--stone)}
+.social-stats{display:flex;flex-wrap:wrap;gap:1.2rem 2.6rem;margin:1.4rem 0 1.8rem}
+.social-stats div b{display:block;font-family:var(--f-display);font-weight:800;
+  font-variation-settings:"wdth" 88;font-size:1.9rem;line-height:1;color:var(--rust-lt)}
+.social-stats div span{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(242,239,233,.66);font-weight:700}
+.ig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+@media(max-width:620px){.ig-grid{grid-template-columns:repeat(3,1fr)}}
+.ig-grid a{position:relative;aspect-ratio:1;overflow:hidden;background:var(--navy-2);display:block}
+.ig-grid img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease,opacity .2s}
+.ig-grid a:hover img{transform:scale(1.06);opacity:.85}
+.ig-grid a::after{content:"";position:absolute;inset:0;background:rgba(194,87,43,0);transition:.2s}
+.ig-grid a:hover::after{background:rgba(194,87,43,.18)}
+/* The social band is dark but isn't .section--dark, so ghost buttons inherit
+   the light-background colour and vanish. Give it the dark-surface treatment. */
+.social-band .btn--ghost{color:var(--stone);border-color:rgba(242,239,233,.4)}
+.social-band .btn--ghost:hover{border-color:var(--stone);background:rgba(242,239,233,.08)}
+.social-band .lede{color:rgba(242,239,233,.76)}
+.social-band h2{color:var(--stone)}
+.btn svg{flex:0 0 auto}
+.team-banner{width:100%;object-fit:cover;max-height:420px}
+/* Reel marker on video posts in the Instagram grid */
+.ig-grid a{position:relative}
+.ig-reel{position:absolute;top:6px;right:7px;z-index:2;color:#fff;font-size:.7rem;
+  text-shadow:0 1px 4px rgba(0,0,0,.6);pointer-events:none}
+
+/* ---------- vertical video (YouTube Short) ----------
+   9:16 footage in a 16:9 frame is mostly black bars. Give it a portrait frame
+   capped in height so it doesn't dominate a desktop viewport. */
+.short-wrap{position:relative;aspect-ratio:9/16;max-height:640px;margin-inline:auto;
+  border-radius:var(--r);overflow:hidden;background:var(--ink);width:100%;max-width:360px}
+.short-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media(max-width:620px){.short-wrap{max-width:100%;max-height:none}}
+
+/* Showroom photos are portrait phone shots; a 4:5 tile suits them far better
+   than the 4:3 used for landscape project photography. */
+/* Match the 3:4 source exactly so portrait tiles are not cropped at all. */
+.grid--portrait .card-figure{aspect-ratio:3/4}
+
+/* ---------- page-head hero video ----------
+   Same treatment as the homepage hero: footage behind, gradient in front, text
+   on top. The source here is a vertical Short, so it overscans hard on desktop —
+   anchored slightly high so the floor stays in frame rather than the ceiling. */
+.pagehead--video{position:relative;overflow:hidden;background:var(--ink)}
+.pagehead-media{position:absolute;inset:0;z-index:0}
+.pagehead-media iframe{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);
+  width:max(100%,177.78vh);height:max(100%,56.25vw);border:0;pointer-events:none}
+.pagehead--video::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg,rgba(12,24,43,.93) 0%,rgba(12,24,43,.84) 34%,
+    rgba(12,24,43,.6) 56%,rgba(12,24,43,.28) 76%,rgba(12,24,43,.1) 100%)}
+@media(max-width:760px){
+  .pagehead--video::before{background:linear-gradient(180deg,rgba(12,24,43,.32) 0%,
+    rgba(12,24,43,.6) 42%,rgba(12,24,43,.86) 100%)}
+  .pagehead--video h1,.pagehead--video .lede,.pagehead--video .eyebrow{
+    text-shadow:0 1px 2px rgba(6,14,26,.7),0 2px 22px rgba(6,14,26,.85)}
+}
+.pagehead--video .wrap{position:relative;z-index:2}
+.pagehead--video::after{z-index:1}
+
+/* ---------- pagehead photo background (site-wide page-title treatment,
+   replaces the flat navy fill with a real project photo + the same dark
+   gradient scrim used on the homepage hero and the video pagehead) ---------- */
+.pagehead--photo{position:relative;overflow:hidden;background:var(--ink)}
+.pagehead-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pagehead--photo::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg,rgba(12,24,43,.93) 0%,rgba(12,24,43,.84) 34%,
+    rgba(12,24,43,.6) 56%,rgba(12,24,43,.28) 76%,rgba(12,24,43,.1) 100%)}
+.pagehead--photo .wrap{position:relative;z-index:2}
+.pagehead--photo::after{z-index:1}
+@media(max-width:760px){
+  .pagehead--photo::before{background:linear-gradient(180deg,rgba(12,24,43,.35) 0%,
+    rgba(12,24,43,.62) 45%,rgba(12,24,43,.88) 100%)}
+  .pagehead--photo h1,.pagehead--photo .lede,.pagehead--photo .eyebrow{
+    text-shadow:0 1px 2px rgba(6,14,26,.7),0 2px 22px rgba(6,14,26,.85)}
+}
+
+/* ---------- showroom page ----------
+   Slim head so the photos are reachable without scrolling far. */
+.pagehead--slim .wrap{padding-block:clamp(26px,3vw,40px)}
+.pagehead--slim h1{margin-bottom:.35em}
+.pagehead--slim .lede{margin-bottom:0}
+
+/* Video beside the visit details, undimmed and playing. */
+.showroom-lead{display:grid;grid-template-columns:minmax(0,220px) 1fr;
+  gap:clamp(20px,3.5vw,44px);align-items:center}
+@media(max-width:760px){
+  .showroom-lead{grid-template-columns:1fr;gap:1.4rem}
+  .showroom-lead .short-wrap{max-width:280px}
+}
+.short-wrap--plain{max-width:100%;max-height:none;box-shadow:var(--shadow)}
+/* No scrim on this one — it is the content, not a backdrop. */
+.short-wrap--plain iframe{position:absolute;inset:0;width:100%;height:100%;
+  transform:none;border:0}
+
+.gal-head{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--f-body);font-weight:800;color:var(--rust);
+  margin:2.2rem 0 .9rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
+.gal-head:first-of-type{margin-top:0}
+.section--tight{padding-block:clamp(28px,3.5vw,44px)}
+
+/* Photo grids stay two-up on phones. Portrait tiles at one-per-row made the
+   showroom page ~27,000px tall, which is not a gallery, it's a hike. */
+@media(max-width:620px){
+  .grid--portrait{grid-template-columns:repeat(2,1fr)!important;gap:8px}
+  .grid--portrait .card-body{padding:.6rem .7rem}
+  .grid--portrait .card-body p{font-size:.76rem;line-height:1.35}
+}
+/* Two filter rows need a label each, or it's unclear they're independent. */
+.filter-label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:800;color:rgba(12,24,43,.5);margin:0 0 .5rem}
+.filters{margin-bottom:1.2rem}
+.filters--mat button[aria-pressed=true]{background:var(--rust-btn);border-color:var(--rust-btn)}
+.load-more-row{display:flex;justify-content:center;margin-top:2rem}
+.load-more-row .btn{min-width:220px}
+
+/* ---------- lightbox ---------- */
+.lb-trigger{all:unset;cursor:zoom-in;display:block;width:100%;height:100%}
+.lb-trigger:focus-visible{outline:3px solid var(--rust);outline-offset:-3px}
+/* top/right/bottom/left used explicitly rather than the "inset" shorthand —
+   inset only reached broad Safari support in 14.1 (2021), and on an unsupported
+   version the overlay would fail to size to the viewport, which can make the
+   real clickable area not line up with what's visually on screen. That
+   mismatch is the leading suspect for a close button that looks right but
+   doesn't respond in Safari specifically. */
+/* The real bug: setting `display:flex` unconditionally on .lb fights the
+   browser's built-in `[hidden]{display:none}` rule. Author CSS wins that fight
+   regardless of selector specificity, so the "hidden" attribute stopped doing
+   anything the moment display was set here — the overlay never actually went
+   away, it just kept sitting on top intercepting clicks, including on its own
+   close button. `display:none` is now the default and `:not([hidden])` is the
+   only path to `flex`, so there's no property collision left to lose. */
+.lb{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;background:rgba(6,14,26,.94);
+  display:none;align-items:center;justify-content:center;padding:clamp(16px,5vw,64px)}
+.lb:not([hidden]){display:flex}
+.lb-figure{margin:0;max-width:min(92vw,1400px);max-height:88vh;display:flex;flex-direction:column;align-items:center}
+.lb-img{max-width:100%;max-height:78vh;width:auto;height:auto;border-radius:2px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);object-fit:contain}
+.lb-caption{color:var(--stone);font-size:.94rem;text-align:center;margin-top:1rem;max-width:70ch}
+.lb-close{position:absolute;top:14px;right:16px;background:none;border:0;color:var(--stone);
+  font-size:2.2rem;line-height:1;cursor:pointer;width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;border-radius:50%}
+.lb-close:hover,.lb-close:active{background:rgba(242,239,233,.12)}
+.lb-close:hover,.lb-close:focus-visible{color:var(--rust-lt)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(242,239,233,.12);
+  border:1px solid rgba(242,239,233,.25);color:var(--stone);width:52px;height:52px;border-radius:50%;
+  font-size:1.8rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .15s}
+.lb-nav:hover,.lb-nav:focus-visible{background:rgba(242,239,233,.22)}
+.lb-prev{left:clamp(8px,3vw,32px)}
+.lb-next{right:clamp(8px,3vw,32px)}
+.lb-count{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+  color:rgba(242,239,233,.6);font-size:.82rem;font-weight:700;letter-spacing:.08em}
+@media(max-width:620px){
+  .lb-nav{width:42px;height:42px;font-size:1.4rem}
+  .lb-close{top:8px;right:10px;font-size:2rem}
+}
+
+/* ---------- video modal ----------
+   For a muted, autoplaying preview that expands to a full player with sound
+   and native controls on click. One shared overlay, same visual language as
+   the photo lightbox above. */
+.video-trigger{position:relative;cursor:pointer}
+.video-trigger::after{content:"";position:absolute;inset:0;background:rgba(12,24,43,0);
+  transition:background .15s ease}
+.video-trigger:hover::after{background:rgba(12,24,43,.12)}
+.video-trigger-hint{position:absolute;left:0;right:0;bottom:0;z-index:2;pointer-events:none;
+  display:flex;align-items:center;gap:.5rem;padding:.7rem .8rem;
+  background:linear-gradient(to top,rgba(12,24,43,.85),transparent);
+  color:var(--stone);font-size:.78rem;font-weight:700;letter-spacing:.02em}
+.video-trigger-hint .dot{width:26px;height:26px;border-radius:50%;background:rgba(242,239,233,.16);
+  border:1px solid rgba(242,239,233,.4);display:flex;align-items:center;justify-content:center;flex:none}
+.video-modal{position:fixed;inset:0;z-index:200;background:rgba(6,14,26,.94);
+  display:none;align-items:center;justify-content:center;padding:clamp(16px,5vw,64px)}
+.video-modal:not([hidden]){display:flex}
+.video-modal-inner{position:relative;width:min(92vw,420px);aspect-ratio:9/16;max-height:88vh;
+  background:var(--ink);border-radius:var(--r);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.video-modal-inner iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-modal .lb-close{position:absolute;top:-52px;right:0}
+@media(max-width:620px){.video-modal .lb-close{top:8px;right:10px;color:var(--stone)}}
+
+/* Honeypot: invisible to people, present for bots that fill every field. Off
+   left rather than display:none/visibility:hidden, since some scraping bots
+   specifically skip fields hidden that way. */
+.hp-field{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.form-error{display:none;background:rgba(194,87,43,.08);border:1px solid var(--rust);
+  border-radius:var(--r);padding:1rem 1.2rem;margin-bottom:1.2rem;font-size:.92rem}
+.form-error.show{display:block}
+.form-submitting{opacity:.6;pointer-events:none}
+
+/* ---------- team headshots ---------- */
+.team-headshot{width:88px;height:88px;border-radius:50%;object-fit:cover;
+  margin-bottom:1rem;display:block}
+.team-headshot--placeholder{display:flex;align-items:center;justify-content:center;
+  background:var(--navy);color:var(--stone);font-family:var(--f-display);
+  font-weight:800;font-variation-settings:"wdth" 88;font-size:1.5rem;
+  letter-spacing:.02em}
+
+/* ---------- video card: click-to-play facade for embedded video (e.g. YouTube Shorts) ---------- */
+.video-card{
+  position:relative;display:block;aspect-ratio:9/16;max-width:300px;margin-inline:auto;
+  border-radius:var(--r);overflow:hidden;background:var(--navy);border:1px solid var(--line);
+  box-shadow:var(--shadow-lg);text-decoration:none;
+}
+.video-card img{width:100%;height:100%;object-fit:cover;opacity:.88;transition:transform .4s ease,opacity .2s ease}
+.video-card:hover img{transform:scale(1.03);opacity:1}
+.video-card .play{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+}
+.video-card .play span{
+  width:58px;height:58px;border-radius:50%;background:var(--rust-btn);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(12,24,43,.4);
+  transition:transform .2s ease,background .2s ease;
+}
+.video-card:hover .play span{transform:scale(1.08);background:var(--rust-lt)}
+.video-card .play svg{margin-left:3px}
+.video-card .cap{
+  position:absolute;left:0;right:0;bottom:0;padding:14px 16px 12px;
+  background:linear-gradient(to top,rgba(12,24,43,.92),transparent);
+  color:var(--stone);font-family:var(--f-display);font-weight:700;font-size:.86rem;
+  letter-spacing:.01em;
+}
+.video-card iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* The portfolio grid's video tile reuses the same click-to-play card, but it
+   sits inside a photo-grid tile (.card > .card-figure-shaped frame) instead
+   of the narrow standalone 9:16 card, so it needs to match that framing. */
+.gal-video-frame{aspect-ratio:4/3;max-width:none;margin-inline:0;border-radius:0;
+  border:0;box-shadow:none;background:var(--navy-2)}
+.video-caption{text-align:center;font-size:.82rem;color:rgba(12,24,43,.6);margin-top:.7rem;max-width:300px;margin-inline:auto}
+.video-feature{background:var(--stone);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.video-feature .split{align-items:center;padding-block:clamp(40px,6vw,64px)}
+.video-feature .eyebrow{color:var(--rust)}

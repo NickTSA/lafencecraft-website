@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Quote Is On Its Way | LA Fence Craft</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://lafencecraft.com/calculator/thank-you/">
+<link rel="icon" href="https://res.cloudinary.com/rj6bqwug/image/upload/f_auto,q_auto/Lafence_favicon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<style>
+  html,body{background:var(--stone);}
+  main{max-width:520px; margin:0 auto; padding:clamp(48px,8vw,80px) var(--gut) 60px; text-align:center;}
+  .check{
+    width:64px; height:64px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 22px;
+  }
+  main h1{font-size:clamp(1.7rem,4vw,2.1rem); margin:0 0 12px;}
+  main p{color:rgba(12,24,43,.7); font-size:15px; line-height:1.6; margin:0 0 8px;}
+  .spam-notice{
+    color:#A6402A; font-weight:700; font-size:13.5px;
+    margin:20px auto 0; max-width:420px; line-height:1.5;
+  }
+  .actions{margin-top:32px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="topbar"><div class="wrap">
+<span>Showroom: 8931 Garvey Ave, Rosemead, CA 91770</span>
+<span><strong>Mon–Fri 8–5 · Sat 10-2</strong> · CA Lic. #1028396</span>
+</div></div>
+<header class="site-head"><div class="wrap">
+<a class="brand" href="/"><img src="https://res.cloudinary.com/rj6bqwug/image/upload/f_auto,q_auto,c_limit,w_1000/LaFenceCraft-1" srcset="https://res.cloudinary.com/rj6bqwug/image/upload/f_auto,q_auto,c_limit,w_400/LaFenceCraft-1 400w, https://res.cloudinary.com/rj6bqwug/image/upload/f_auto,q_auto,c_limit,w_700/LaFenceCraft-1 700w, https://res.cloudinary.com/rj6bqwug/image/upload/f_auto,q_auto,c_limit,w_1000/LaFenceCraft-1 1000w" sizes="140px" alt="" loading="eager" decoding="async" width="140" height="40">
+<span class="brand-txt">LA Fence Craft<small>Rosemead, California</small></span></a>
+<nav class="nav" id="nav"><a href="/services/">Services</a><a href="/service-areas/">Neighborhoods</a><a href="/projects/">Projects</a><a href="/showroom/">Showroom</a><a href="/about-us/">About</a><a href="/calculator/">Calculator</a>
+<span class="nav-cta"><a class="nav-tel" href="tel:+16265863378">(626) 586-3378</a>
+<a class="btn btn--primary" href="/free-estimate/">Free estimate</a></span></nav>
+</div></header>
+
+<main id="main">
+  <div class="check">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <h1>Your quote is on its way</h1>
+  <p>We've sent your estimate to your email. A member of the LA Fence Craft team will follow up shortly to schedule your free on-site walkthrough.</p>
+  <p class="spam-notice">⚠ Don't see it? Please check your spam or junk folder — and mark it "not spam" so you get our follow-ups.</p>
+
+  <div class="actions">
+    <a class="btn btn--primary btn--lg" href="tel:+16265863378">Call 626-586-3378</a>
+    <a class="btn btn--ghost btn--lg" href="/calculator/">Back to Calculator</a>
+  </div>
+</main>
+
+<footer class="site-foot"><div class="wrap">
+<div class="wrap"><div class="foot-bottom" style="border-top:none;">
+<span>© 2026 LA Fence Craft. All rights reserved.</span>
+<span><a href="/showroom/">Showroom</a> · <a href="/privacy/">Privacy</a> · <a href="/faq/">FAQ</a> · <a href="/contact-us/">Contact</a></span>
+</div></div>
+</div></footer>
+
+<!-- =====================================================================
+     CONVERSION TRACKING — this page only loads after a real quote request,
+     so firing the Ads conversion here (instead of via a JS event on the
+     calculator page) is a more reliable signal for Smart Campaigns, which
+     detect conversions by URL/page load.
+     Keep these three values in sync with the same constants in /calculator/.
+     ===================================================================== -->
+<script>
+  const GA4_MEASUREMENT_ID = "G-G9BNF01EQ9";
+  const ADS_CONVERSION_ID = "AW-18359497061";
+  const ADS_CONVERSION_LABEL = ""; // not needed -- this goal uses automatic page-load detection, no label configured in Ads
+</script>
+<script>
+  (function(){
+    if(!GA4_MEASUREMENT_ID && !ADS_CONVERSION_ID) return;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + (GA4_MEASUREMENT_ID || ADS_CONVERSION_ID);
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    if(GA4_MEASUREMENT_ID) gtag('config', GA4_MEASUREMENT_ID);
+    if(ADS_CONVERSION_ID) gtag('config', ADS_CONVERSION_ID);
+
+    if(ADS_CONVERSION_ID && ADS_CONVERSION_LABEL){
+      gtag('event', 'conversion', { send_to: ADS_CONVERSION_ID + '/' + ADS_CONVERSION_LABEL });
+    }
+  })();
+</script>
+</body>
+</html>
