@@ -402,6 +402,19 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid JSON" }) };
   }
 
+  // Anti-spam backstop. This is the endpoint bots hit directly (skipping the
+  // page entirely), so the honeypot/timing checks belong here, not just in
+  // calculator/index.html -- mirrors the pattern already used in
+  // submit-estimate.js. Both checks return a fake 200 "success" rather than
+  // a 4xx, so a bot probing the endpoint gets no signal that it was caught
+  // and no reason to adapt.
+  if (p.website) {
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true, skipped: "honeypot" }) };
+  }
+  if (typeof p.elapsed_ms === "number" && p.elapsed_ms < 3000) {
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true, skipped: "too_fast" }) };
+  }
+
   if (!p.email || !p.name) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Missing required fields: name, email" }) };
   }

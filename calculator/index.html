@@ -609,6 +609,12 @@ main{max-width:var(--wrap);margin:0 auto;padding:clamp(18px,2.5vw,26px) var(--gu
       </div>
       <div class="field full"><label for="fNotes">Anything else we should know? <span>optional</span></label>
         <textarea id="fNotes" placeholder="Gate location, slope, existing fence removal, timeline…"></textarea></div>
+
+      <div class="hp-field" aria-hidden="true">
+        <label for="websitecalc">Leave this field blank</label>
+        <input id="websitecalc" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
       <div class="full" style="margin-top:.4rem">
         <button type="submit" class="btn btn-accent btn-block">Email My Quote</button>
       </div>
@@ -723,6 +729,13 @@ const GOOGLE_MAPS_API_KEY = "AIzaSyDS6byBP1AF38g_AcDjOOd8--lpaB6phq0";
 // Leave blank to run in demo mode — submissions log to the browser console only.
 const LEAD_FUNCTION_URL = "/.netlify/functions/submit-lead";
 const OWNER_EMAIL = "info@lafencecraft.com";
+
+// Anti-spam: when this script started running, used to time how long the
+// lead form was open before submit. A bot that fills and submits instantly
+// gets flagged; a real person spending a few seconds on name/phone/email
+// doesn't. Checked again server-side in submit-lead.js, which is the real
+// backstop -- this client-side value is easy for a bot to fake or omit.
+const FORM_LOAD_TS = Date.now();
 
 /* =====================================================================
    PRICING — real rates. Each material has one or more "variants"
@@ -2117,6 +2130,16 @@ photoInput.addEventListener('change', async ()=>{
 
 document.getElementById('leadForm').addEventListener('submit', async (e)=>{
   e.preventDefault();
+
+  // Honeypot: a real visitor never sees or fills this field (see the
+  // .hp-field markup above). Bail out silently, same as the pattern in
+  // site.js -- no error shown, nothing sent, so a bot gets no signal that
+  // it was caught. Real protection is the mirrored check in
+  // submit-lead.js, since a bot that skips this JS and POSTs straight to
+  // the function never runs this check at all.
+  const hp = document.getElementById('websitecalc');
+  if (hp && hp.value) return;
+
   const { low, high, perFoot } = calcEstimate();
   const gateSummary = Object.entries(state.gates)
     .filter(([, qty]) => qty > 0)
@@ -2143,6 +2166,8 @@ document.getElementById('leadForm').addEventListener('submit', async (e)=>{
     estimate_high: money(high),
     owner_email: OWNER_EMAIL,
     submitted_at: new Date().toLocaleString(),
+    website: hp ? hp.value : '', // honeypot -- always empty for real visitors
+    elapsed_ms: Date.now() - FORM_LOAD_TS,
     map_paths: encodedMapPaths(),
     map_view: mapViewForStaticImage(),
     photos: photoDataUrls.map((url, i) => ({
